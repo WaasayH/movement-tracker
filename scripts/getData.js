@@ -97,3 +97,25 @@ window.addEventListener('userproximity', function(event) {
    document.getElementById("UserProximity").innerHTML="UserProximity: "+event.near;
 });
 */
+
+const box = document.getElementById('movableBox');
+
+let isDragging = false;
+let offset = { x: 0, y: 0 };
+
+box.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offset.x = e.offsetX;
+    offset.y = e.offsetY;
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+        box.style.left = `${e.pageX - offset.x}px`;
+        box.style.top = `${e.pageY - offset.y}px`;
+    }
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+});
